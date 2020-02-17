@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import DogContainer from './DogContainer.js'
+import DogContainer from './DogContainer'
 
 function App() {
   console.log(process.env);
