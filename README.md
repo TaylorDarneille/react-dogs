@@ -17,3 +17,20 @@ To fix it, you program yoru server to speak to certain clients that it recognize
 [TODO: figure out what IOW server is]
 
 IOW server uses HTTP headers and sometimes also a response to an OPTIONS request to say who is allowed to connect and what they're allowed to do
+
+Uses SEMANTIC UI -- fun library of Graphical UI components that are very easy to use and customize
+
+https://react.semantic-ui.com/
+
+To install it,
+
+`npm install semantic-ui-css semantic-ui-react`
+
+Then `index.js` Add this line
+
+`import 'semantic-ui-css/semantic.min.css'`
+
+before this line 
+
+`import './index.css'
+
