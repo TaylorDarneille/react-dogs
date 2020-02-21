@@ -12,7 +12,7 @@ BROWSERS implement this for secrutiy reasons
 
 https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
 
-To fix it, you program yoru server to speak to certain clients that it recognizes
+To fix it, you program your server to speak to certain clients that it recognizes
 
 [TODO: figure out what IOW server is]
 
@@ -33,4 +33,3 @@ Then `index.js` Add this line
 before this line 
 
 `import './index.css'
-
