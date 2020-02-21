@@ -1,6 +1,7 @@
 
 //where are we going to use React?
 import React, { Component } from 'react'
+import DogList from '../DogList'
 
 class DogContainer extends Component {
 
@@ -24,8 +25,9 @@ class DogContainer extends Component {
 	getDogs = async () => {
 		try {
 			// the keyword await makes JS wait until that promist settles and returns its result
-			const dogsResponse = await fetch(process.env.REACT_APP_API_URL + "/api/v1/dogs")
+			const dogsResponse = await fetch(process.env.REACT_APP_API_URL + "/api/v1/dogs/")
 			const dogsJson = await dogsResponse.json()
+			// loggint the results you get back from an API and drillign down into the object to make sure you are putting the thing you mean to be putting into stat is important
 			console.log("here is the data we got in getDogs in DogContainer");
 			console.log(dogsJson);	
 		} catch(err) {
@@ -35,11 +37,15 @@ class DogContainer extends Component {
 	}
 
 	render() {
+		console.log("here is this.state in render() in DogContainer");
+		console.log(this.state);
 		return(
-			"Dog Container"
+			<>
+				<p>"Dog Container"</p>
+				<DogList />
+			</>
 		)
 	}
-
 }
 
 export default DogContainer
