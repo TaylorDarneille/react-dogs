@@ -132,20 +132,38 @@ class DogContainer extends Component {
 		console.log("to look like")
 		console.log(newDogInfo)
 
-		const updateDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+this.state.idOfDogToEdit,
-			{
-			method: 'PUT',
-			body: JSON.stringify(newDogInfo),
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-		console.log("here is response from fetch in updateDog in DogContainer")
-		console.log(updateDogResponse)
+		try {
+			const updateDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+this.state.idOfDogToEdit,
+				{
+				method: 'PUT',
+				body: JSON.stringify(newDogInfo),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
 
-		const udpateDogJson = await updateDogResponse.json()
-		console.log("here's the data")
-		console.log(udpateDogJson)
+			const updateDogJson = await updateDogResponse.json()
+
+			if(updateDogResponse.status==200) {
+
+				const newDogArrayWithUpdatedDog = this.state.dogs.map((dog)=>{
+					
+					if(dog.id === this.state.idOfDogToEdit) {
+						return updateDogJson.data
+					} else {
+						return dog
+					}
+
+				})
+				this.setState({
+					dogs: newDogArrayWithUpdatedDog
+				})
+
+			}		
+		} catch(err) {
+			console.log(err)
+		}
+
 	}
 
 	render() {
