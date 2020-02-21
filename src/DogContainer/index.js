@@ -2,6 +2,7 @@
 //where are we going to use React?
 import React, { Component } from 'react'
 import DogList from '../DogList'
+import NewDogForm from '../NewDogForm'
 
 class DogContainer extends Component {
 
@@ -39,13 +40,18 @@ class DogContainer extends Component {
 		}
 	}
 
+	createDog = async (dogToAdd) => {
+		console.log("Form submission")
+		console.log(dogToAdd)
+	}
+
 	render() {
 		console.log("here is this.state in render() in DogContainer");
 		console.log(this.state);
 		return(
 			<>
-				<p>"Dog Container"</p>
 				<DogList dogs={this.state.dogs} />
+				<NewDogForm createDog={this.createDog}/>
 			</>
 		)
 	}
