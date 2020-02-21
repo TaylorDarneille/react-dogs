@@ -91,12 +91,36 @@ class DogContainer extends Component {
 		}
 	}
 
+	deleteDog = async (id) => {
+		console.log("trying to delete dog with id", id)
+		try {
+			const deleteDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+id, {
+				method: 'DELETE'
+			})
+			const deleteDogJson = await deleteDogResponse.json()
+			console.log("here's response when we tried to delete a dog")
+			console.log(deleteDogJson)
+
+			// dog is now deleted from db but still showing on screen, so we have to fix our state to reflect the change
+			if(deleteDogJson.status===200) {
+				this.setState({
+					//only the dogs who id ISNT the one we just tried to delete
+					dogs: this.state.dogs.filter(dog => dog.id !== id)
+				})
+			} else {
+				throw new Error("Could not delete dog")
+			}
+		} catch(err) {
+			console.log(err)
+		}
+	}
+
 	render() {
 		console.log("here is this.state in render() in DogContainer");
 		console.log(this.state);
 		return(
 			<>
-				<DogList dogs={this.state.dogs} />
+				<DogList dogs={this.state.dogs} deleteDog={this.deleteDog} />
 				<NewDogForm createDog={this.createDog}/>
 			</>
 		)

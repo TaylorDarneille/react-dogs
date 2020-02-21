@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, Button } from 'semantic-ui-react'
 
 function DogList(props) {
 	const dogs = props.dogs.map((dog) => {
@@ -12,10 +12,13 @@ function DogList(props) {
 					<Card.Header>
 						{dog.name}
 					</Card.Header>
+					<Card.Description>
+						{dog.name} is a {dog.breed} that belongs to {dog.owner}
+					</Card.Description>
 				</Card.Content>
-				<Card.Description>
-					{dog.name} is a {dog.breed} that belongs to {dog.owner}
-				</Card.Description>
+				<Card.Content extra>
+					<Button onClick={() => props.deleteDog(dog.id)}>Delete Dog</Button>
+				</Card.Content>
 			</Card>
 		)
 		// return <li key={dog.id}>{dog.name} is a {dog.breed} that belongs to {dog.owner}</li>
