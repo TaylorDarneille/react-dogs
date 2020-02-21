@@ -120,9 +120,17 @@ class DogContainer extends Component {
 	editDog = (idOfDogToEdit) => {
 		console.log("heres the id of the dog we want to edit")
 		console.log(idOfDogToEdit)
+		console.log()
 		this.setState({
 			idOfDogToEdit: idOfDogToEdit
 		})
+	}
+
+	updateDog = (newDogInfo) => {
+		// id of dog we need is in state
+		console.log("udpateDog in DogContainer, we are trying to  update dog", this.state.idOfDogToEdit)
+		console.log("to look like")
+		console.log(newDogInfo)
 	}
 
 	render() {
@@ -135,7 +143,10 @@ class DogContainer extends Component {
 				{
 					this.state.idOfDogToEdit !== -1
 					?
-					<EditDogModal />
+					<EditDogModal 
+						dogToEdit={this.state.dogs.find((dog) => dog.id===this.state.idOfDogToEdit)}
+						updateDog={this.updateDog}
+					/>
 					:
 					null
 				}
