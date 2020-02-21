@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import DogList from '../DogList'
 import NewDogForm from '../NewDogForm'
+import EditDogModal from '../EditDogModal'
 
 class DogContainer extends Component {
 
@@ -11,7 +12,8 @@ class DogContainer extends Component {
 		super(props)
 
 		this.state = {
-			dogs: []
+			dogs: [],
+			idOfDogToEdit: -1
 		}
 	}
 
@@ -115,13 +117,28 @@ class DogContainer extends Component {
 		}
 	}
 
+	editDog = (idOfDogToEdit) => {
+		console.log("heres the id of the dog we want to edit")
+		console.log(idOfDogToEdit)
+		this.setState({
+			idOfDogToEdit: idOfDogToEdit
+		})
+	}
+
 	render() {
 		console.log("here is this.state in render() in DogContainer");
 		console.log(this.state);
 		return(
 			<>
-				<DogList dogs={this.state.dogs} deleteDog={this.deleteDog} />
+				<DogList dogs={this.state.dogs} deleteDog={this.deleteDog} editDog={this.editDog} />
 				<NewDogForm createDog={this.createDog}/>
+				{
+					this.state.idOfDogToEdit !== -1
+					?
+					<EditDogModal />
+					:
+					null
+				}
 			</>
 		)
 	}

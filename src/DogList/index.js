@@ -18,10 +18,10 @@ function DogList(props) {
 				</Card.Content>
 				<Card.Content extra>
 					<Button onClick={() => props.deleteDog(dog.id)}>Delete Dog</Button>
+					<Button onClick={() => props.editDog(dog.id)}>Edit Dog</Button>
 				</Card.Content>
 			</Card>
 		)
-		// return <li key={dog.id}>{dog.name} is a {dog.breed} that belongs to {dog.owner}</li>
 	})
 	return (
 		<ul>
