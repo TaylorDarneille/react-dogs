@@ -27,9 +27,12 @@ class DogContainer extends Component {
 			// the keyword await makes JS wait until that promist settles and returns its result
 			const dogsResponse = await fetch(process.env.REACT_APP_API_URL + "/api/v1/dogs/")
 			const dogsJson = await dogsResponse.json()
-			// loggint the results you get back from an API and drillign down into the object to make sure you are putting the thing you mean to be putting into stat is important
+			// logging the results you get back from an API and drillign down into the object to make sure you are putting the thing you mean to be putting into stat is important
 			console.log("here is the data we got in getDogs in DogContainer");
-			console.log(dogsJson);	
+			console.log(dogsJson);
+			this.setState({
+				dogs: dogsJson.data
+			})	
 		} catch(err) {
 			// catches errors both in fetch and in response.json
 			console.log(err)
@@ -42,7 +45,7 @@ class DogContainer extends Component {
 		return(
 			<>
 				<p>"Dog Container"</p>
-				<DogList />
+				<DogList dogs={this.state.dogs} />
 			</>
 		)
 	}

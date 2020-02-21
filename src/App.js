@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import DogContainer from './DogContainer'
 
 function App() {
