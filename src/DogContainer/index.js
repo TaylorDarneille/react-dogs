@@ -159,11 +159,17 @@ class DogContainer extends Component {
 					dogs: newDogArrayWithUpdatedDog
 				})
 
+				this.closeModal()
+
 			}		
 		} catch(err) {
 			console.log(err)
 		}
 
+	}
+
+	closeModal = () => {
+		this.setState({idOfDogToEdit:-1})
 	}
 
 	render() {
@@ -179,6 +185,7 @@ class DogContainer extends Component {
 					<EditDogModal 
 						dogToEdit={this.state.dogs.find((dog) => dog.id===this.state.idOfDogToEdit)}
 						updateDog={this.updateDog}
+						closeModal={this.closeModal}
 					/>
 					:
 					null
