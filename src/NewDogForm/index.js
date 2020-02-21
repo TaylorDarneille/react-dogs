@@ -21,6 +21,11 @@ class NewDogForm extends Component {
 	handleSubmit = (event) =>  {
 		event.preventDefault()
 		this.props.createDog(this.state)
+		this.setState = {
+			name: '',
+			owner: '',
+			breed: ''
+		}
 	}
 
 	render() {
@@ -36,6 +41,7 @@ class NewDogForm extends Component {
 						name="name"
 						value={this.state.name}
 						onChange={this.handleChange}
+						placeholder={"Enter name"}
 					/>
 					<Label>Breed:</Label>
 					<Form.Input
@@ -43,6 +49,7 @@ class NewDogForm extends Component {
 						name="breed"
 						value={this.state.breed}
 						onChange={this.handleChange}
+						placeholder={"Enter breed"}
 					/>
 					<Label>Owner:</Label>
 					<Form.Input
@@ -50,6 +57,7 @@ class NewDogForm extends Component {
 						name="owner"
 						value={this.state.owner}
 						onChange={this.handleChange}
+						placeholder={"Enter owner"}
 					/>
 					<Button type="Submit">Create Dog</Button>
 				</Form>

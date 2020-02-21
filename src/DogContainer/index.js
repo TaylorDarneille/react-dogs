@@ -43,6 +43,28 @@ class DogContainer extends Component {
 	createDog = async (dogToAdd) => {
 		console.log("Form submission")
 		console.log(dogToAdd)
+
+		try {
+			// cusotmize fetch according to https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
+			// do this by passing in a second arg after the URL --
+				// an object containing various configuration
+			// so we can sen da. POST request with JSON as the body
+			// request body will be dogToAdd
+			// we also need to set a header when we send json Content-Type: application/json
+		
+			const createDogResponse = await fetch(process.env.REACT_APP_API_URL+'/api/v1/dogs/', {
+				method: 'POST',
+				body: JSON.stringify(dogToAdd), // this is how you convert an object to JSON)
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			const createDogJson = await createDogResponse.json()
+			console.log("here is what we got when we tried to create a dog in createDog in DogContainer")
+			console.log(createDogJson)
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	render() {
