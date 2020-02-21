@@ -59,9 +59,33 @@ class DogContainer extends Component {
 					'Content-Type': 'application/json'
 				}
 			})
+			console.log("here is http response createDogResponse in createDog in DogContainer")
+			console.log(createDogResponse) // our HTTP status code is here
 			const createDogJson = await createDogResponse.json()
 			console.log("here is what we got when we tried to create a dog in createDog in DogContainer")
-			console.log(createDogJson)
+			console.log(createDogJson) // our messages we djsonified in flask are here
+		
+			// write some kind of logic on something about the response to determin if and how to update screen
+			if(createDogResponse.status === 201) {
+				//there are many ways we could cause the dog to appear on screen
+				// 1. quick and dirty -- call getDogs
+				// -- requires a second fetch call, more time, more bandwith
+				// -- you already have ralmost all of the data you need except hte new dog
+				// this.getDogs()
+
+				//2. manually add the dog to state -- more elegant, you don't need the 2nd call
+				// always be sure to use the actual object from database
+				// no data is real except data in database
+				// const state = this.state
+				// state.dogs.push(createDogJson.data)
+				// this.setState(state)
+
+				// 3. use spread operator
+				// ... this.state.dogs means " all the dogs that are already in this array"
+				this.setState({
+					dogs: [...this.state.dogs, createDogJson.data]
+				})
+			}
 		} catch (err) {
 			console.log(err)
 		}
