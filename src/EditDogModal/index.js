@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Form, Button, Label, Header } from 'semantic-ui-react'
-
+import { Form, Button, Label, Header, Modal } from 'semantic-ui-react'
+// let's make our edit modal nice using Semantic-ui-react
+// https://react.sematic-ui.com/modules/modal/
 
 class EditDogModal extends Component {
 	constructor() {
@@ -31,31 +32,39 @@ class EditDogModal extends Component {
 
 	render() {
 		return(
-			<Form onSubmit={this.handleSubmit}>
-				<Label>Name:</Label>
-				<Form.Input 
-					type="text"
-					name="name"
-					value={this.state.name}
-					placeholder="Enter Dog Name"
-					onChange={this.handleChange}
-				/>
-				<Form.Input 
-					type="text"
-					name="breed"
-					value={this.state.breed}
-					placeholder="Enter Dog Breed"
-					onChange={this.handleChange}
-				/>
-				<Form.Input 
-					type="text"
-					name="owner"
-					value={this.state.owner}
-					placeholder="Enter Dog Owner"
-					onChange={this.handleChange}
-				/>
-				<Button color={"green"} type="Submit">Update Dog</Button>
-			</Form>
+			<Modal open={true}>
+				<Header>Edit Dog</Header>
+				<Modal.Content>
+					<Form onSubmit={this.handleSubmit}>
+						<Label>Name:</Label>
+						<Form.Input 
+							type="text"
+							name="name"
+							value={this.state.name}
+							placeholder="Enter Dog Name"
+							onChange={this.handleChange}
+						/>
+						<Form.Input 
+							type="text"
+							name="breed"
+							value={this.state.breed}
+							placeholder="Enter Dog Breed"
+							onChange={this.handleChange}
+						/>
+						<Form.Input 
+							type="text"
+							name="owner"
+							value={this.state.owner}
+							placeholder="Enter Dog Owner"
+							onChange={this.handleChange}
+						/>
+						<Modal.Actions>
+							<Button color={"green"} type="Submit">Update Dog</Button>
+							<p onClick={this.props.closeModal}>(Cancel)</p>
+						</Modal.Actions>
+					</Form>
+				</Modal.Content>
+			</Modal>
 		)
 	}
 }
