@@ -13,7 +13,14 @@ class DogContainer extends Component {
 
 		this.state = {
 			dogs: [],
-			idOfDogToEdit: -1
+			editModalOpen: false,
+			// this will be the data we are editing with the form in the modal
+			dogToEdit: {
+				name: '', 
+				breed: '',
+				owner: '',
+				id: ''
+			}
 		}
 	}
 
@@ -32,7 +39,7 @@ class DogContainer extends Component {
 			const dogsJson = await dogsResponse.json()
 			// logging the results you get back from an API and drillign down into the object to make sure you are putting the thing you mean to be putting into stat is important
 			console.log("here is the data we got in getDogs in DogContainer");
-			console.log(dogsJson);
+			console.log("dogsJson:", dogsJson);
 			this.setState({
 				dogs: dogsJson.data
 			})	
@@ -118,11 +125,20 @@ class DogContainer extends Component {
 	}
 
 	editDog = (idOfDogToEdit) => {
-		console.log("heres the id of the dog we want to edit")
-		console.log(idOfDogToEdit)
-		console.log()
+		// console.log("heres the id of the dog we want to edit")
+		// console.log(idOfDogToEdit)
+		// console.log()
+		const dogToEdit = this.state.dogs.find((dog)=>dog.id===idOfDogToEdit)
 		this.setState({
-			idOfDogToEdit: idOfDogToEdit
+			editModalOpen: true,
+			dogToEdit: {
+				...dogToEdit
+				// the line above is using the spread operator to represent the 4 lines below
+				// name: dogToEdit.name,
+				// owner: dogToEdit.owner,
+				// breed: dogToEdit.breed,
+				// id: dogToEdit.id
+			}
 		})
 	}
 
@@ -169,27 +185,23 @@ class DogContainer extends Component {
 	}
 
 	closeModal = () => {
-		this.setState({idOfDogToEdit:-1})
+		this.setState({
+			editModalOpen: false
+		})
 	}
 
 	render() {
-		console.log("here is this.state in render() in DogContainer");
-		console.log(this.state);
+		console.log("DogContainer state:", this.state);
 		return(
 			<>
 				<DogList dogs={this.state.dogs} deleteDog={this.deleteDog} editDog={this.editDog} />
 				<NewDogForm createDog={this.createDog}/>
-				{
-					this.state.idOfDogToEdit !== -1
-					?
-					<EditDogModal 
-						dogToEdit={this.state.dogs.find((dog) => dog.id===this.state.idOfDogToEdit)}
-						updateDog={this.updateDog}
-						closeModal={this.closeModal}
-					/>
-					:
-					null
-				}
+				<EditDogModal 
+					open={this.state.editModalOpen}
+					dogToEdit={this.state.dogToEdit}
+					updateDog={this.updateDog}
+					closeModal={this.closeModal}
+				/>
 			</>
 		)
 	}

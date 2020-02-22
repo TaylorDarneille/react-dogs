@@ -14,6 +14,13 @@ class EditDogModal extends Component {
 	}
 
 	componentDidMount() {
+		console.log("EditDogModal: componentDidMount")
+		console.log("EditDogModal props:", this.props);
+		// notice -- in DogContainer -- we are rendering EditDogModal all teh time instead of conditionally
+		// so 2 problems
+		// (a) it "mounts" even when it isn't "showing"
+		// (b) componentDidMount no longer fires when we re-open it
+		// this means our form is empty
 		this.setState({
 			name: this.props.dogToEdit.name,
 			breed: this.props.dogToEdit.breed,
@@ -32,7 +39,7 @@ class EditDogModal extends Component {
 
 	render() {
 		return(
-			<Modal open={true}>
+			<Modal open={this.props.open} closeIcon={true} onClose={this.props.closeModal}>
 				<Header>Edit Dog</Header>
 				<Modal.Content>
 					<Form onSubmit={this.handleSubmit}>
@@ -60,7 +67,6 @@ class EditDogModal extends Component {
 						/>
 						<Modal.Actions>
 							<Button color={"green"} type="Submit">Update Dog</Button>
-							<p onClick={this.props.closeModal}>(Cancel)</p>
 						</Modal.Actions>
 					</Form>
 				</Modal.Content>
