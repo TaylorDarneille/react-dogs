@@ -12,10 +12,26 @@ class App extends Component {
 		}
 	}
 
+	register = async (registerInfo) => {
+		console.log("register() in app.js called with the following info", registerInfo)
+	}
+
+	login = async (loginInfo) => {
+		console.log("login() in app.js called with the following info", loginInfo)
+	}
+
 	render() {
 		  return (
 		    <div className="App">
-		    { this.state.loggedIn ? <DogContainer /> : <LoginRegisterForm /> }
+		    { 
+		    	this.state.loggedIn 
+		    	? 
+		    	<DogContainer /> 
+		    	: 
+		    	<LoginRegisterForm 
+		    		register={this.register}
+		    		login={this.login}
+		    	/> }
 		    </div>
 		  );	
 	}

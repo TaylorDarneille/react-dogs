@@ -28,8 +28,15 @@ class LoginRegisterForm extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(`You are trying to ${this.state.action}, with the following credentials`);
-		console.log(this.state)
+		this.loginRegister()
+	}
+
+	loginRegister = () => {
+		if(this.state.action=="register") {
+			this.props.register(this.state)
+		} else {
+			this.props.login(this.state)
+		}
 	}
 
 	render() {
