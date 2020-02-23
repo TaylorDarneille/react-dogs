@@ -26,11 +26,20 @@ class LoginRegisterForm extends Component {
 		this.setState({ [e.target.name]: e.target.value })
 	}
 
+	handleSubmit = (e) => {
+		e.preventDefault()
+		console.log(`You are trying to ${this.state.action}, with the following credentials`);
+		console.log(this.state)
+	}
+
 	render() {
+		// TODO: add form validation code
+		// highlight blank fields in red and show an error message below them -- username requred, etc
+		// BONUS TODO: use Regex to impose requirements on password
 		  return (
 		  	<div className="LoginRegisterForm">
 		  		<h2 className="LoginRegisterForm-h2">{this.state.action+' here'}</h2>
-				<Form>
+				<Form onSubmit={this.handleSubmit}>
 					{
 						// only show username field if they are registering bc our back end only uses email for login
 						this.state.action === 'register'
