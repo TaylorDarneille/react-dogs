@@ -143,7 +143,7 @@ class DogContainer extends Component {
 	}
 
 	handleEditChange = (event) => {
-		// this i sa 100% awesome way to solve this problem
+		// this is a 100% awesome way to solve this problem
 		// const dog = this.state.dogToEdit
 		// dog[even.target.name] = event.target.value
 		// this.setState({ dogToEdit: dog })

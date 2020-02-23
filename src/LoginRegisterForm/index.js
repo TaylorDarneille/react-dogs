@@ -22,6 +22,10 @@ class LoginRegisterForm extends Component {
 		}
 	}
 
+	handleChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value })
+	}
+
 	render() {
 		  return (
 		  	<div className="LoginRegisterForm">
@@ -38,6 +42,7 @@ class LoginRegisterForm extends Component {
 							name="username"
 							placeholder="Enter username"
 							value={this.state.username}
+							onChange={this.handleChange}
 							/>
 						</React.Fragment>
 						:
@@ -49,6 +54,7 @@ class LoginRegisterForm extends Component {
 						name="email"
 						placeholder="Enter email"
 						value={this.state.email}
+						onChange={this.handleChange}
 					/>
 					<Label>Password:</Label>
 					<Form.Input 
@@ -56,6 +62,7 @@ class LoginRegisterForm extends Component {
 						name="password"
 						placeholder="Enter password"
 						value={this.state.password}
+						onChange={this.handleChange}
 					/>
 					<Button type="Submit">{this.state.action === 'register' ? 'Register' : 'Login'}</Button>
 				</Form>
