@@ -1,0 +1,9 @@
+.LoginRegistorForm-h2 {
+	text-transform: capitalize;
+}
+
+.fake-link {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}

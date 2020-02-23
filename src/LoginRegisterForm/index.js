@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button, Label } from 'semantic-ui-react'
-
+import './index.css'
 
 class LoginRegisterForm extends Component {
 
@@ -9,21 +9,40 @@ class LoginRegisterForm extends Component {
 		this.state = {
 			email: '',
 			password: '',
-			username: ''
+			username: '',
+			action: 'login' // login or register
+		}
+	}
+
+	switchForm = () => {
+		if(this.state.action === 'login') {
+			this.setState({ action: 'register' })
+		} else {
+			this.setState({ action: 'login' })
 		}
 	}
 
 	render() {
 		  return (
 		  	<div className="LoginRegisterForm">
+		  		<h2 className="LoginRegisterForm-h2">{this.state.action+' here'}</h2>
 				<Form>
-					<Label>Username:</Label>
-					<Form.Input 
-						type="text"
-						name="username"
-						placeholder="Enter username"
-						value={this.state.username}
-					/>
+					{
+						// only show username field if they are registering bc our back end only uses email for login
+						this.state.action === 'register'
+						?
+						<React.Fragment>
+							<Label>Username:</Label>
+							<Form.Input 
+							type="text"
+							name="username"
+							placeholder="Enter username"
+							value={this.state.username}
+							/>
+						</React.Fragment>
+						:
+						null
+					}
 					<Label>Email:</Label>
 					<Form.Input 
 						type="text"
@@ -38,8 +57,18 @@ class LoginRegisterForm extends Component {
 						placeholder="Enter password"
 						value={this.state.password}
 					/>
-					<Button type="Submit">Log In</Button>
+					<Button type="Submit">{this.state.action === 'register' ? 'Register' : 'Login'}</Button>
 				</Form>
+				{
+					this.state.action === 'register'
+					?
+					// they see this on register screen
+					<small>Already have an account? Login <span className="fake-link" onClick={this.switchForm}>here</span>.</small>
+					:
+					// And this on login screen
+					<small> Need an account? Sign up <span className="fake-link" onClick={this.switchForm}>here</span>!</small>
+
+				}
 			</div>
 		  );	
 	}
