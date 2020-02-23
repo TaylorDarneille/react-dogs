@@ -142,21 +142,34 @@ class DogContainer extends Component {
 		})
 	}
 
-	updateDog = async (newDogInfo) => {
-		// id of dog we need is in state
-		console.log("udpateDog in DogContainer, we are trying to  update dog", this.state.idOfDogToEdit)
-		console.log("to look like")
-		console.log(newDogInfo)
+	handleEditChange = (event) => {
+		// this i sa 100% awesome way to solve this problem
+		// const dog = this.state.dogToEdit
+		// dog[even.target.name] = event.target.value
+		// this.setState({ dogToEdit: dog })
 
+		// but often React dves will use fancy new syntax like this to show off
+		this.setState({
+			dogToEdit: {
+				...this.state.dogToEdit, // copy all old properties from object in state usign spread operator
+				[event.target.name]: event.target.value // replace the old value for whatever was editted for the new value
+			}
+		})		
+	}
+
+	handleSubmitEditForm = (e) => {
+		e.preventDefault()
+		this.updateDog()
+	}
+
+	updateDog = async () => {
 		try {
-			const updateDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+this.state.idOfDogToEdit,
+			const updateDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+this.state.dogToEdit.id,
 				{
-				method: 'PUT',
-				body: JSON.stringify(newDogInfo),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
+					method: 'PUT',
+					body: JSON.stringify(this.state.dogToEdit),
+					headers: { 'Content-Type': 'application/json'}
+				})
 
 			const updateDogJson = await updateDogResponse.json()
 
@@ -164,7 +177,7 @@ class DogContainer extends Component {
 
 				const newDogArrayWithUpdatedDog = this.state.dogs.map((dog)=>{
 					
-					if(dog.id === this.state.idOfDogToEdit) {
+					if(dog.id === updateDogJson.data.id) {
 						return updateDogJson.data
 					} else {
 						return dog
@@ -201,6 +214,8 @@ class DogContainer extends Component {
 					dogToEdit={this.state.dogToEdit}
 					updateDog={this.updateDog}
 					closeModal={this.closeModal}
+					handleEditChange={this.handleEditChange}
+					handleSubmitEditForm={this.handleSubmitEditForm}
 				/>
 			</>
 		)
