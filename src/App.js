@@ -47,6 +47,14 @@ class App extends Component {
 			console.log(loginResponse);
 			const loginJson = await loginResponse.json()
 			console.log(loginJson);
+
+			// "log in" the user and switch the component to dog container
+			if(loginResponse.status===200) {
+				this.setState({
+					loggedIn: true,
+					loggedInUserEamil: loginJson.data.email // optiona but helpful
+				})
+			}
 		} catch(err) {
 			if(err) {
 				console.error("err!", err)

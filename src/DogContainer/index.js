@@ -35,7 +35,11 @@ class DogContainer extends Component {
 	getDogs = async () => {
 		try {
 			// the keyword await makes JS wait until that promist settles and returns its result
-			const dogsResponse = await fetch(process.env.REACT_APP_API_URL + "/api/v1/dogs/")
+			const dogsResponse = await fetch(process.env.REACT_APP_API_URL + "/api/v1/dogs/",
+			{
+				// you must send cookie everytime for back end ot know you are logged in
+				credentials: 'include'
+			})
 			const dogsJson = await dogsResponse.json()
 			// logging the results you get back from an API and drillign down into the object to make sure you are putting the thing you mean to be putting into stat is important
 			console.log("here is the data we got in getDogs in DogContainer");
