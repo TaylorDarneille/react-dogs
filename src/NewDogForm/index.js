@@ -6,7 +6,6 @@ class NewDogForm extends Component {
 		super(props)
 		this.state = {
 			name: '',
-			owner: '',
 			breed: ''
 		}
 	}
@@ -23,7 +22,6 @@ class NewDogForm extends Component {
 		this.props.createDog(this.state)
 		this.setState = {
 			name: '',
-			owner: '',
 			breed: ''
 		}
 	}
@@ -50,14 +48,6 @@ class NewDogForm extends Component {
 						value={this.state.breed}
 						onChange={this.handleChange}
 						placeholder={"Enter breed"}
-					/>
-					<Label>Owner:</Label>
-					<Form.Input
-						type="text"
-						name="owner"
-						value={this.state.owner}
-						onChange={this.handleChange}
-						placeholder={"Enter owner"}
 					/>
 					<Button type="Submit">Create Dog</Button>
 				</Form>

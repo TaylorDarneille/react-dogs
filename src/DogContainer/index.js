@@ -18,7 +18,6 @@ class DogContainer extends Component {
 			dogToEdit: {
 				name: '', 
 				breed: '',
-				owner: '',
 				id: ''
 			}
 		}
@@ -66,6 +65,7 @@ class DogContainer extends Component {
 			// we also need to set a header when we send json Content-Type: application/json
 		
 			const createDogResponse = await fetch(process.env.REACT_APP_API_URL+'/api/v1/dogs/', {
+				credentials: 'include',
 				method: 'POST',
 				body: JSON.stringify(dogToAdd), // this is how you convert an object to JSON)
 				headers: {

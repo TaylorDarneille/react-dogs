@@ -96,13 +96,6 @@ function EditDogModal(props) {
 						placeholder="Enter Dog Breed"
 						onChange={props.handleEditChange}
 					/>
-					<Form.Input 
-						type="text"
-						name="owner"
-						value={props.dogToEdit.owner}
-						placeholder="Enter Dog Owner"
-						onChange={props.handleEditChange}
-					/>
 					<Modal.Actions>
 						<Button color={"green"} type="Submit">Update Dog</Button>
 					</Modal.Actions>
