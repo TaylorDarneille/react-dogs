@@ -70,12 +70,7 @@ class DogContainer extends Component {
 					'Content-Type': 'application/json'
 				}
 			})
-			console.log("here is http response createDogResponse in createDog in DogContainer")
-			console.log(createDogResponse) // our HTTP status code is here
 			const createDogJson = await createDogResponse.json()
-			console.log("here is what we got when we tried to create a dog in createDog in DogContainer")
-			console.log(createDogJson) // our messages we djsonified in flask are here
-		
 			// write some kind of logic on something about the response to determin if and how to update screen
 			if(createDogResponse.status === 201) {
 				//there are many ways we could cause the dog to appear on screen
@@ -105,7 +100,7 @@ class DogContainer extends Component {
 	deleteDog = async (id) => {
 		console.log("trying to delete dog with id", id)
 		try {
-			const deleteDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+id+"/"}, {
+			const deleteDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+id+"/", {
 				credentials: 'include',
 				method: 'DELETE'
 			})
