@@ -108,6 +108,7 @@ class DogContainer extends Component {
 		console.log("trying to delete dog with id", id)
 		try {
 			const deleteDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+id, {
+				credentials: 'include',
 				method: 'DELETE'
 			})
 			const deleteDogJson = await deleteDogResponse.json()
@@ -170,6 +171,7 @@ class DogContainer extends Component {
 		try {
 			const updateDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+this.state.dogToEdit.id,
 				{
+					credentials: 'include',
 					method: 'PUT',
 					body: JSON.stringify(this.state.dogToEdit),
 					headers: { 'Content-Type': 'application/json'}
