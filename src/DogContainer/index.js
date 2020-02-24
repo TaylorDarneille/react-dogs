@@ -105,9 +105,6 @@ class DogContainer extends Component {
 				method: 'DELETE'
 			})
 			const deleteDogJson = await deleteDogResponse.json()
-			console.log("here's response when we tried to delete a dog")
-			console.log(deleteDogJson)
-
 			// dog is now deleted from db but still showing on screen, so we have to fix our state to reflect the change
 			if(deleteDogJson.status===200) {
 				this.setState({
