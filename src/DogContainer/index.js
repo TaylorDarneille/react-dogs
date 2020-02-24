@@ -105,7 +105,7 @@ class DogContainer extends Component {
 	deleteDog = async (id) => {
 		console.log("trying to delete dog with id", id)
 		try {
-			const deleteDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+id, {
+			const deleteDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+id+"/", {
 				credentials: 'include',
 				method: 'DELETE'
 			})
@@ -174,26 +174,17 @@ class DogContainer extends Component {
 					body: JSON.stringify(this.state.dogToEdit),
 					headers: { 'Content-Type': 'application/json'}
 				})
-
 			const updateDogJson = await updateDogResponse.json()
-
 			if(updateDogResponse.status==200) {
-
-				const newDogArrayWithUpdatedDog = this.state.dogs.map((dog)=>{
-					
+				const newDogArrayWithUpdatedDog = this.state.dogs.map((dog)=>{		
 					if(dog.id === updateDogJson.data.id) {
 						return updateDogJson.data
 					} else {
 						return dog
 					}
-
 				})
-				this.setState({
-					dogs: newDogArrayWithUpdatedDog
-				})
-
+				this.setState({ dogs: newDogArrayWithUpdatedDog )
 				this.closeModal()
-
 			}		
 		} catch(err) {
 			console.log(err)
