@@ -167,7 +167,7 @@ class DogContainer extends Component {
 
 	updateDog = async () => {
 		try {
-			const updateDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+this.state.dogToEdit.id,
+			const updateDogResponse = await fetch(process.env.REACT_APP_API_URL+"/api/v1/dogs/"+this.state.dogToEdit.id+'/',
 				{
 					credentials: 'include',
 					method: 'PUT',
