@@ -19,11 +19,14 @@ class NewDogForm extends Component {
 
 	handleSubmit = (event) =>  {
 		event.preventDefault()
+		console.log("HELLO!!!!!!!")
 		this.props.createDog(this.state)
-		this.setState = {
+		
+		console.log("HELLO number 2")
+		this.setState({
 			name: '',
 			breed: ''
-		}
+		})
 	}
 
 	render() {
