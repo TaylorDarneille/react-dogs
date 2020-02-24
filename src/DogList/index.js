@@ -5,7 +5,6 @@ function DogList(props) {
 	const dogs = props.dogs.map((dog) => {
 		let colors = ["red","orange","yellow","olive","green","teal","blue","violet","purple","pink","brown","grey","black"]
 		let color = colors[Math.floor(Math.random()*colors.length)-1]
-		console.log("color:", color);
 		return (
 			<Card key={dog.id} centered={true} color={color} >
 				<Card.Content>

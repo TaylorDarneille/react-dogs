@@ -1,5 +1,3 @@
-
-//where are we going to use React?
 import React, { Component } from 'react'
 import DogList from '../DogList'
 import NewDogForm from '../NewDogForm'
