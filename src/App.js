@@ -14,6 +14,23 @@ class App extends Component {
 
 	register = async (registerInfo) => {
 		console.log("register() in app.js called with the following info", registerInfo)
+		const url = process.env.REACT_APP_API_URL+'/api/v1/users/register/'
+
+		try {
+			const registerResponse = await fetch(url, {
+				credentials: 'include', //sends the cookie
+				method: 'POST',
+				body: JSON.stringify(registerInfo),
+				headers: {'Content-Type': 'application/json'}
+			})
+			console.log(registerResponse);
+			const registerJson = await registerResponse.json()
+			console.log(registerJson);
+		} catch(err) {
+			if(err) {
+				console.error(err)
+			}
+		}
 	}
 
 	login = async (loginInfo) => {
