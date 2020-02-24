@@ -28,13 +28,30 @@ class App extends Component {
 			console.log(registerJson);
 		} catch(err) {
 			if(err) {
-				console.error(err)
+				console.error("err!", err)
 			}
 		}
 	}
 
 	login = async (loginInfo) => {
 		console.log("login() in app.js called with the following info", loginInfo)
+		const url = process.env.REACT_APP_API_URL+'/api/v1/users/login/'
+
+		try {
+			const loginResponse = await fetch(url, {
+				credentials: 'include', //sends the cookie
+				method: 'POST',
+				body: JSON.stringify(loginInfo),
+				headers: {'Content-Type': 'application/json'}
+			})
+			console.log(loginResponse);
+			const loginJson = await loginResponse.json()
+			console.log(loginJson);
+		} catch(err) {
+			if(err) {
+				console.error("err!", err)
+			}
+		}
 	}
 
 	render() {
