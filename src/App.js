@@ -73,7 +73,8 @@ class App extends Component {
 		    	<LoginRegisterForm 
 		    		register={this.register}
 		    		login={this.login}
-		    	/> }
+		    	/> 
+		    }
 		    </div>
 		  );	
 	}
